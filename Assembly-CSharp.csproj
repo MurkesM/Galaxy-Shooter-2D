@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Laser.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\TripleShotPowerup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GameDevHQ\FileBase\Plugin\Filebase.dll" />
@@ -289,11 +290,11 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>E:\Unity Projects\2020.3.28f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Filebase">
       <HintPath>Assets\GameDevHQ\FileBase\Plugin\Filebase.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>E:\Unity Projects\2020.3.28f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
