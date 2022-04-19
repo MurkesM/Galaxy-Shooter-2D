@@ -7,9 +7,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private int _playerLives = 3;
-    [SerializeField] private float _playerSpeed = 3.5f;
+    [SerializeField] private float _playerSpeed = 7f;
     [SerializeField] private float _fireRate = 0.15f;
     [SerializeField] private bool _tripleShotActive = false;
+    [SerializeField] private bool _shieldActive = false;
+    [SerializeField] private GameObject _shieldVisualizer;
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
 
@@ -65,12 +67,20 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _playerLives--;
-
-        if (_playerLives < 1)
+        if (_shieldActive == true)
         {
-            _spawnManager.OnPlayerDeath();
-            Destroy(gameObject);
+            _shieldVisualizer.SetActive(false);
+            _shieldActive = false;
+        }
+        else if(_shieldActive == false)
+        {
+            _playerLives--;
+
+            if (_playerLives < 1)
+            {
+                _spawnManager.OnPlayerDeath();
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -80,9 +90,27 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
+    public void SpeedActive()
+    {
+        _playerSpeed = 12;
+        StartCoroutine(SpeedPowerDownRoutine());
+    }
+
+    public void ShieldActive()
+    {
+        _shieldActive = true;
+        _shieldVisualizer.SetActive(true);
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
         _tripleShotActive = false;
+    }
+
+    IEnumerator SpeedPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _playerSpeed = 7;
     }
 }
