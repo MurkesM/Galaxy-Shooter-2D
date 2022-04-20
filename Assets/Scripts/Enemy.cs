@@ -17,10 +17,10 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
 
-        if (transform.position.y <= -5.80f)
+        if (transform.position.y <= -6.5f)
         {
             float randomXPosition = Random.Range(-9f, 9f);
-            transform.position = new Vector3(randomXPosition, 8, 0);
+            transform.position = new Vector3(randomXPosition, 8.5f, 0);
         }
     }
 
