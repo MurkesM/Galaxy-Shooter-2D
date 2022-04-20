@@ -14,11 +14,20 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _shieldVisualizer;
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
+    protected UIManager _uiManager;
+
+    [SerializeField] private int _score;
 
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_spawnManager == null)
+            Debug.Log("SpawnManager is null");
+        if (_uiManager == null)
+            Debug.Log("UIManager is null");
     }
 
     void Update()
@@ -76,6 +85,8 @@ public class Player : MonoBehaviour
         {
             _playerLives--;
 
+            _uiManager.UpdateLiveSprites(_playerLives);
+
             if (_playerLives < 1)
             {
                 _spawnManager.OnPlayerDeath();
@@ -112,5 +123,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _playerSpeed = 7;
+    }
+
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }
