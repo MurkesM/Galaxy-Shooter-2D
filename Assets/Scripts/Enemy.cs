@@ -9,16 +9,21 @@ public class Enemy : MonoBehaviour
     Animator _animator;
     Collider2D _collider2D;
 
+    private AudioSource _audioSource;
+    [SerializeField] AudioClip _explosionClip;
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _animator = GetComponent<Animator>();
         _collider2D = GetComponent<Collider2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_player == null)
             Debug.Log("Player is null");
         if (_animator == null)
             Debug.Log("Animator is null");
+        if (_audioSource == null)
+            Debug.Log("Audio Source is null");
     }
 
     void Update()
@@ -43,6 +48,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("OnEnemyDeath");
             _collider2D.enabled = false;
             _enemySpeed = 1.5f;
+            _audioSource.PlayOneShot(_explosionClip);
             Destroy(gameObject, 2.8f);
         }
 
@@ -52,6 +58,7 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger("OnEnemyDeath");
             _collider2D.enabled = false;
             _enemySpeed = 1.5f;
+            _audioSource.PlayOneShot(_explosionClip);
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
         }

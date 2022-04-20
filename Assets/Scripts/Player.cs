@@ -12,13 +12,19 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _tripleShotActive = false;
     [SerializeField] private bool _shieldActive = false;
     [SerializeField] private GameObject _shieldVisualizer;
+    [SerializeField] private GameObject _explosionPrefab;
 
     [SerializeField] GameObject _rightFire;
     [SerializeField] GameObject _leftFire;
 
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
-    protected UIManager _uiManager;
+    private UIManager _uiManager;
+   
+    private AudioSource _audioSource;
+    [SerializeField] AudioClip _laserClip;
+    [SerializeField] AudioClip _explosionClip;
+    [SerializeField] AudioClip _powerupClip;
 
     [SerializeField] private int _score;
 
@@ -27,11 +33,14 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, -3, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
             Debug.Log("SpawnManager is null");
         if (_uiManager == null)
             Debug.Log("UIManager is null");
+        if (_audioSource == null)
+            Debug.Log("Audio Source is null");
 
         _rightFire.SetActive(false);
         _leftFire.SetActive(false);
@@ -79,6 +88,8 @@ public class Player : MonoBehaviour
             Instantiate(_tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
             _canFire = Time.time + _fireRate;
         }
+
+        _audioSource.PlayOneShot(_laserClip);
     }
 
     public void Damage()
@@ -98,27 +109,38 @@ public class Player : MonoBehaviour
 
             if (_playerLives < 1)
             {
-                _spawnManager.OnPlayerDeath();
-                Destroy(gameObject);
+                KillPlayer();
             }
         }
+    }
+
+    void KillPlayer()
+    {
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        _spawnManager.OnPlayerDeath();
+        _audioSource.PlayOneShot(_explosionClip);
+        _playerSpeed = 0;
+        Destroy(gameObject, 1.75f);
     }
 
     public void TripleShotActive()
     {
         _tripleShotActive = true;
+        _audioSource.PlayOneShot(_powerupClip);
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
     public void SpeedActive()
     {
         _playerSpeed = 12;
+        _audioSource.PlayOneShot(_powerupClip);
         StartCoroutine(SpeedPowerDownRoutine());
     }
 
     public void ShieldActive()
     {
         _shieldActive = true;
+        _audioSource.PlayOneShot(_powerupClip);
         _shieldVisualizer.SetActive(true);
     }
 
