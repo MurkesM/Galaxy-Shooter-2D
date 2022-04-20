@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _tripleShotActive = false;
     [SerializeField] private bool _shieldActive = false;
     [SerializeField] private GameObject _shieldVisualizer;
+
+    [SerializeField] GameObject _rightFire;
+    [SerializeField] GameObject _leftFire;
+
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
     protected UIManager _uiManager;
@@ -20,7 +24,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0, -3, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
@@ -28,6 +32,9 @@ public class Player : MonoBehaviour
             Debug.Log("SpawnManager is null");
         if (_uiManager == null)
             Debug.Log("UIManager is null");
+
+        _rightFire.SetActive(false);
+        _leftFire.SetActive(false);
     }
 
     void Update()
@@ -85,6 +92,8 @@ public class Player : MonoBehaviour
         {
             _playerLives--;
 
+            HandlePlayerHurtAnimations();
+
             _uiManager.UpdateLiveSprites(_playerLives);
 
             if (_playerLives < 1)
@@ -129,5 +138,18 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uiManager.UpdateScore(_score);
+    }
+
+    void HandlePlayerHurtAnimations()
+    {
+        switch (_playerLives)
+        {
+            case 2:
+                _rightFire.SetActive(true);
+                break;
+            case 1:
+                _leftFire.SetActive(true);
+                break;
+        }
     }
 }

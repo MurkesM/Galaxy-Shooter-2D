@@ -5,12 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _enemySpeed = 4;
-   
     Player _player;
+    Animator _animator;
+    Collider2D _collider2D;
 
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _animator = GetComponent<Animator>();
+        _collider2D = GetComponent<Collider2D>();
+
+        if (_player == null)
+            Debug.Log("Player is null");
+        if (_animator == null)
+            Debug.Log("Animator is null");
     }
 
     void Update()
@@ -32,15 +40,20 @@ public class Enemy : MonoBehaviour
             {
                 _player.Damage();
             }
-
-            Destroy(gameObject);
+            _animator.SetTrigger("OnEnemyDeath");
+            _collider2D.enabled = false;
+            _enemySpeed = 1.5f;
+            Destroy(gameObject, 2.8f);
         }
 
         if (other.tag == "Laser")
         {
             _player.AddScore(10);
+            _animator.SetTrigger("OnEnemyDeath");
+            _collider2D.enabled = false;
+            _enemySpeed = 1.5f;
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            Destroy(gameObject, 2.8f);
         }
     }
 }
