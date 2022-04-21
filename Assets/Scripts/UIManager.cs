@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GameOverFlickerRoutine());
     }
 
-    IEnumerator GameOverFlickerRoutine()
+IEnumerator GameOverFlickerRoutine()
     {
         while(true)
         {

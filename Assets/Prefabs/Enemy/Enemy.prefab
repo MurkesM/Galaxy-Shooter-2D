@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpeed: 4
+  _enemyShotPrefab: {fileID: 2529876359841965864, guid: c9721297cd3ddec4aa68b09ffb159375, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
 --- !u!50 &4032082343393936876
 Rigidbody2D:
   serializedVersion: 4

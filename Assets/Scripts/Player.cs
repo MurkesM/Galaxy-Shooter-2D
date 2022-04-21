@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
+    private Collider2D _collider2D;
    
     private AudioSource _audioSource;
     [SerializeField] AudioClip _laserClip;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        _collider2D = GetComponent<Collider2D>();
 
         if (_spawnManager == null)
             Debug.Log("SpawnManager is null");
@@ -116,6 +118,7 @@ public class Player : MonoBehaviour
 
     void KillPlayer()
     {
+        _collider2D.enabled = false;
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _spawnManager.OnPlayerDeath();
         _audioSource.PlayOneShot(_explosionClip);

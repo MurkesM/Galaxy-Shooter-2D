@@ -5,12 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _enemySpeed = 4;
+    [SerializeField] GameObject _enemyShotPrefab;
     Player _player;
     Animator _animator;
     Collider2D _collider2D;
+    bool _enemyDead = false;
 
     private AudioSource _audioSource;
     [SerializeField] AudioClip _explosionClip;
+    [SerializeField] AudioClip _laserClip;
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -24,6 +27,8 @@ public class Enemy : MonoBehaviour
             Debug.Log("Animator is null");
         if (_audioSource == null)
             Debug.Log("Audio Source is null");
+
+        StartCoroutine(EnemyFireRoutine());
     }
 
     void Update()
@@ -46,6 +51,7 @@ public class Enemy : MonoBehaviour
                 _player.Damage();
             }
             _animator.SetTrigger("OnEnemyDeath");
+            _enemyDead = true;
             _collider2D.enabled = false;
             _enemySpeed = 1.5f;
             _audioSource.PlayOneShot(_explosionClip);
@@ -56,11 +62,25 @@ public class Enemy : MonoBehaviour
         {
             _player.AddScore(10);
             _animator.SetTrigger("OnEnemyDeath");
+            _enemyDead = true;
             _collider2D.enabled = false;
             _enemySpeed = 1.5f;
             _audioSource.PlayOneShot(_explosionClip);
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
+        }
+    }
+
+    IEnumerator EnemyFireRoutine()
+    {
+        Vector3 laserOffset = new Vector3(0, -0.8f, 0);
+
+        while (_enemyDead == false)
+        {
+            int randomFireTime = Random.Range(3, 7);
+            Instantiate(_enemyShotPrefab, transform.position + laserOffset, Quaternion.identity);
+            _audioSource.PlayOneShot(_laserClip);
+            yield return new WaitForSeconds(randomFireTime);
         }
     }
 }
