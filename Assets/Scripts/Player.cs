@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _thruster;
 
     [SerializeField] int _playerLives = 3;
+    [SerializeField] int _ammo = 15;
     [SerializeField] float _playerSpeed = 7f;
     [SerializeField] bool _tripleShotActive = false;
     [SerializeField] bool _speedPowerupActive = false;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip _laserClip;
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _powerupClip;
+    [SerializeField] AudioClip _noAmmo; 
 
     void Start()
     {
@@ -63,8 +65,11 @@ public class Player : MonoBehaviour
         if (_canMove == true)
             HandleMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo > 0)
             ShootLaser();
+       
+        else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo <= 0)
+            _audioSource.PlayOneShot(_noAmmo);
     }
 
     void HandleMovement()
@@ -104,6 +109,8 @@ public class Player : MonoBehaviour
 
             Instantiate(_laserPrefab, transform.position + laserOffset, Quaternion.identity);
             _canFire = Time.time + _fireRate;
+            _ammo--;
+            _uiManager.UpdateAmmo(_ammo);
         }
         else if (_tripleShotActive == true)
         {
@@ -111,6 +118,8 @@ public class Player : MonoBehaviour
 
             Instantiate(_tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
             _canFire = Time.time + _fireRate;
+            _ammo--;
+            _uiManager.UpdateAmmo(_ammo);
         }
 
         _audioSource.PlayOneShot(_laserClip);
