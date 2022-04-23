@@ -50,25 +50,30 @@ public class Enemy : MonoBehaviour
             {
                 _player.Damage();
             }
-            _animator.SetTrigger("OnEnemyDeath");
-            _enemyDead = true;
-            _collider2D.enabled = false;
-            _enemySpeed = 1.5f;
-            _audioSource.PlayOneShot(_explosionClip);
+
+            KillEnemy();
+
             Destroy(gameObject, 2.8f);
         }
 
         if (other.tag == "Laser")
         {
             _player.AddScore(10);
-            _animator.SetTrigger("OnEnemyDeath");
-            _enemyDead = true;
-            _collider2D.enabled = false;
-            _enemySpeed = 1.5f;
-            _audioSource.PlayOneShot(_explosionClip);
+
+            KillEnemy();
+           
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
         }
+    }
+
+    void KillEnemy()
+    {
+        _animator.SetTrigger("OnEnemyDeath");
+        _enemyDead = true;
+        _enemySpeed = 1.5f;
+        _collider2D.enabled = false;
+        _audioSource.PlayOneShot(_explosionClip);
     }
 
     IEnumerator EnemyFireRoutine()
