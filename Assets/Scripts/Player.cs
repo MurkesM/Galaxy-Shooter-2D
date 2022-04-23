@@ -186,6 +186,13 @@ public class Player : MonoBehaviour
         _uiManager.UpdateAmmo(_ammo);
     }
 
+    public void AddLife()
+    {
+        _playerLives++;
+        _uiManager.UpdateLiveSprites(_playerLives);
+        HandlePlayerHurtAnimations();
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
@@ -209,15 +216,20 @@ public class Player : MonoBehaviour
     {
         switch (_playerLives)
         {
+            case 3:
+                _rightFire.SetActive(false);
+                break;
             case 2:
                 _rightFire.SetActive(true);
+                _leftFire.SetActive(false);
                 break;
             case 1:
                 _leftFire.SetActive(true);
                 break;
         }
     }
-     void DamageShield()
+
+    void DamageShield()
     {
         switch (_shieldHitCount)
         {

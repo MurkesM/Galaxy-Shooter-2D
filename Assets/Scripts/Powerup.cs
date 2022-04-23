@@ -5,7 +5,7 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     [SerializeField] private float _speed = 3;
-    [SerializeField] private int powerupID;//0 = TripleShot, 1 = Speed, 2 = Shield, 3 = Ammo
+    [SerializeField] private int powerupID;//0 = TripleShot, 1 = Speed, 2 = Shield, 3 = Ammo, 4 = Life
     private Player _player;
 
     void Start()
@@ -42,6 +42,9 @@ public class Powerup : MonoBehaviour
                          break;
                     case 3:
                         _player.RefillAmmo();
+                        break;
+                    case 4:
+                        _player.AddLife();
                         break;
                     default:
                         Debug.Log("Default Value");
