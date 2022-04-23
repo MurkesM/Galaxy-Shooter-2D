@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject _laserPrefab;
-    [SerializeField] private GameObject _tripleShotPrefab;
-    [SerializeField] private int _playerLives = 3;
-    [SerializeField] private float _playerSpeed = 7f;
-    [SerializeField] private float _fireRate = 0.15f;
-    [SerializeField] private bool _tripleShotActive = false;
-    [SerializeField] private bool _shieldActive = false;
-    [SerializeField] private GameObject _shieldVisualizer;
-    [SerializeField] private GameObject _explosionPrefab;
-
+    [SerializeField] GameObject _laserPrefab;
+    [SerializeField] GameObject _tripleShotPrefab;
+    [SerializeField] GameObject _shieldVisualizer;
+    [SerializeField] GameObject _explosionPrefab;
     [SerializeField] GameObject _rightFire;
     [SerializeField] GameObject _leftFire;
-
-    private float _canFire = -1f;
-    private SpawnManager _spawnManager;
-    private UIManager _uiManager;
-    private Collider2D _collider2D;
+    [SerializeField] GameObject _thruster;
    
-    private AudioSource _audioSource;
+    [SerializeField] int _playerLives = 3;
+    [SerializeField] float _playerSpeed = 7f;
+    [SerializeField] bool _tripleShotActive = false;
+    [SerializeField] bool _speedPowerupActive = false;
+    [SerializeField] bool _shieldActive = false;
+    
+    
+    float _fireRate = 0.15f;
+    float _canFire = -1f;
+
+    SpawnManager _spawnManager;
+    UIManager _uiManager;
+    Collider2D _collider2D;
+   
+    AudioSource _audioSource;
     [SerializeField] AudioClip _laserClip;
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _powerupClip;
 
-    [SerializeField] private int _score;
+    int _score;
 
     void Start()
     {
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
 
         _rightFire.SetActive(false);
         _leftFire.SetActive(false);
+        _thruster.SetActive(false);
     }
 
     void Update()
@@ -66,6 +71,17 @@ public class Player : MonoBehaviour
         transform.Translate(_playerSpeed * Time.deltaTime * direction);
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.96f, 0), 0);
+
+        if (_speedPowerupActive == true && Input.GetKey(KeyCode.LeftShift))
+        {
+            _playerSpeed = 12;
+            _thruster.SetActive(true);
+        }
+        else
+        {
+            _playerSpeed = 7;
+            _thruster.SetActive(false);
+        }
 
         if (transform.position.x <= -11.4f)
             transform.position = new Vector3(11.4f, transform.position.y, 0);
@@ -135,9 +151,9 @@ public class Player : MonoBehaviour
 
     public void SpeedActive()
     {
-        _playerSpeed = 12;
         _audioSource.PlayOneShot(_powerupClip);
         StartCoroutine(SpeedPowerDownRoutine());
+        _speedPowerupActive = true;
     }
 
     public void ShieldActive()
@@ -157,6 +173,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _playerSpeed = 7;
+        _speedPowerupActive = false;
     }
 
     public void AddScore(int points)
