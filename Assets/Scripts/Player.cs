@@ -94,11 +94,11 @@ public class Player : MonoBehaviour
             _thruster.SetActive(false);
         }
 
-        if (transform.position.x <= -11.4f)
-            transform.position = new Vector3(11.4f, transform.position.y, 0);
+        if (transform.position.x <= -10.23)
+            transform.position = new Vector3(10.23f, transform.position.y, 0);
         
-        else if (transform.position.x >= 11.4f)
-            transform.position = new Vector3(-11.4f, transform.position.y, 0);
+        else if (transform.position.x >= 10.23)
+            transform.position = new Vector3(-10.23f, transform.position.y, 0);
     }
 
     void ShootLaser()

@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
 
         while (_stopSpawning == false)
         {
-            float randomXPosition = Random.Range(-9f, 9f);
+            float randomXPosition = Random.Range(-10, 10);
             Vector3 spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
 
             GameObject newEnemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
 
         while (_stopSpawning == false)
         {
-            float randomXPosition = Random.Range(-9f, 9f);
+            float randomXPosition = Random.Range(-10, 10);
             Vector3 spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
             float randomSpawnTime = Random.Range(3f, 7f);
             int randomPowerup = Random.Range(0, _powerups.Length);
