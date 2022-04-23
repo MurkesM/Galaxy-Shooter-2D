@@ -11,27 +11,28 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _rightFire;
     [SerializeField] GameObject _leftFire;
     [SerializeField] GameObject _thruster;
-   
+
     [SerializeField] int _playerLives = 3;
     [SerializeField] float _playerSpeed = 7f;
     [SerializeField] bool _tripleShotActive = false;
     [SerializeField] bool _speedPowerupActive = false;
     [SerializeField] bool _shieldActive = false;
-    
-    
+    [SerializeField] int _shieldHitCount = 3;
+    [SerializeField] bool _canMove = true;
+
     float _fireRate = 0.15f;
     float _canFire = -1f;
+    int _score;
 
     SpawnManager _spawnManager;
     UIManager _uiManager;
     Collider2D _collider2D;
-   
+    SpriteRenderer _shieldSpriteRenderer;
+
     AudioSource _audioSource;
     [SerializeField] AudioClip _laserClip;
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _powerupClip;
-
-    int _score;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _collider2D = GetComponent<Collider2D>();
+        _shieldSpriteRenderer = _shieldVisualizer.GetComponent<SpriteRenderer>();
 
         if (_spawnManager == null)
             Debug.Log("SpawnManager is null");
@@ -47,15 +49,19 @@ public class Player : MonoBehaviour
             Debug.Log("UIManager is null");
         if (_audioSource == null)
             Debug.Log("Audio Source is null");
+        if (_shieldSpriteRenderer == null)
+            Debug.Log("Shield SpriteRenderer is null");
 
         _rightFire.SetActive(false);
         _leftFire.SetActive(false);
         _thruster.SetActive(false);
+        _shieldVisualizer.SetActive(false);
     }
 
     void Update()
     {
-        HandleMovement();
+        if (_canMove == true)
+            HandleMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire)
             ShootLaser();
@@ -114,8 +120,8 @@ public class Player : MonoBehaviour
     {
         if (_shieldActive == true)
         {
-            _shieldVisualizer.SetActive(false);
-            _shieldActive = false;
+            _shieldHitCount--;
+            DamageShield();
         }
         else if(_shieldActive == false)
         {
@@ -125,7 +131,7 @@ public class Player : MonoBehaviour
 
             _uiManager.UpdateLiveSprites(_playerLives);
 
-            if (_playerLives < 1)
+            if (_playerLives <= 0)
             {
                 KillPlayer();
             }
@@ -134,11 +140,11 @@ public class Player : MonoBehaviour
 
     void KillPlayer()
     {
+        _canMove = false;
         _collider2D.enabled = false;
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _spawnManager.OnPlayerDeath();
         _audioSource.PlayOneShot(_explosionClip);
-        _playerSpeed = 0;
         Destroy(gameObject, 1.75f);
     }
 
@@ -159,6 +165,8 @@ public class Player : MonoBehaviour
     public void ShieldActive()
     {
         _shieldActive = true;
+        _shieldHitCount = 3;
+        _shieldSpriteRenderer.color = Color.cyan;
         _audioSource.PlayOneShot(_powerupClip);
         _shieldVisualizer.SetActive(true);
     }
@@ -191,6 +199,22 @@ public class Player : MonoBehaviour
                 break;
             case 1:
                 _leftFire.SetActive(true);
+                break;
+        }
+    }
+     void DamageShield()
+    {
+        switch (_shieldHitCount)
+        {
+            case 2:
+                _shieldSpriteRenderer.color = Color.magenta;
+                break;
+            case 1:
+                _shieldSpriteRenderer.color = Color.red;
+                break;
+            case 0:
+                _shieldVisualizer.SetActive(false);
+                _shieldActive = false;
                 break;
         }
     }

@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     Collider2D _collider2D;
     bool _enemyDead = false;
 
+  
+
     private AudioSource _audioSource;
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _laserClip;
