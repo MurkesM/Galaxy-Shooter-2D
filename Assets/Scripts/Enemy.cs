@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
             {
                 _player.Damage();
             }
+            _player.AddScore(10);
 
             KillEnemy();
 

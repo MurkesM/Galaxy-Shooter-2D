@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &522046446
 Transform:
   m_ObjectHideFlags: 0
@@ -307,19 +307,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 7368294743166144249, guid: ce8d23b4d4585474c9db9733a26c4437, type: 3}
   _tripleShotPrefab: {fileID: 1542790026711110233, guid: c051c935067f2b840aa245c0d8a19143, type: 3}
-  _playerLives: 3
-  _playerSpeed: 7
-  _fireRate: 0.15
-  _tripleShotActive: 0
-  _shieldActive: 0
   _shieldVisualizer: {fileID: 2080232141778592826}
   _explosionPrefab: {fileID: 5921232694906149614, guid: df077d19b8f40a446a45823ad93e5ae4, type: 3}
   _rightFire: {fileID: 4821959761731562467}
   _leftFire: {fileID: 8386616132231436922}
+  _thruster: {fileID: 522046443}
+  _playerLives: 3
+  _ammo: 15
+  _playerSpeed: 7
+  _tripleShotActive: 0
+  _speedPowerupActive: 0
+  _shieldActive: 0
+  _shieldHitCount: 3
+  _canMove: 1
   _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _powerupClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
-  _score: 0
+  _noAmmo: {fileID: 8300000, guid: 87c0a3db79ed7bd47bd80e0c37066cc8, type: 3}
 --- !u!70 &532742196
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

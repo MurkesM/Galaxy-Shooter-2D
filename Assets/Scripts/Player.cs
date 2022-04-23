@@ -180,6 +180,12 @@ public class Player : MonoBehaviour
         _shieldVisualizer.SetActive(true);
     }
 
+    public void RefillAmmo()
+    {
+        _ammo = 15;
+        _uiManager.UpdateAmmo(_ammo);
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
