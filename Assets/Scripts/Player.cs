@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
             _shieldHitCount--;
             DamageShield();
         }
-        else if(_shieldActive == false)
+        else if(_shieldActive == false && _playerLives > 0)
         {
             _playerLives--;
 
@@ -186,10 +186,14 @@ public class Player : MonoBehaviour
 
     public void AddLife()
     {
-        _playerLives++;
         _audioSource.PlayOneShot(_powerupClip);
-        _uiManager.UpdateLiveSprites(_playerLives);
-        HandlePlayerHurtAnimations();
+
+        if (_playerLives < 3)
+        {
+            _playerLives++;
+            _uiManager.UpdateLiveSprites(_playerLives);
+            HandlePlayerHurtAnimations();
+        }
     }
 
     public void HeatSeekingMissileActive()
