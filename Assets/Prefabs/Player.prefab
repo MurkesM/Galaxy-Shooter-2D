@@ -307,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 7368294743166144249, guid: ce8d23b4d4585474c9db9733a26c4437, type: 3}
   _tripleShotPrefab: {fileID: 1542790026711110233, guid: c051c935067f2b840aa245c0d8a19143, type: 3}
+  _heatSeekingMissilePrefab: {fileID: 7627355934010751388, guid: 20e9740979431d24b8530c979b09c2c8, type: 3}
   _shieldVisualizer: {fileID: 2080232141778592826}
   _explosionPrefab: {fileID: 5921232694906149614, guid: df077d19b8f40a446a45823ad93e5ae4, type: 3}
   _rightFire: {fileID: 4821959761731562467}
@@ -316,6 +317,7 @@ MonoBehaviour:
   _ammo: 15
   _playerSpeed: 7
   _tripleShotActive: 0
+  _heatSeekingMissileActive: 0
   _speedPowerupActive: 0
   _shieldActive: 0
   _shieldHitCount: 3
@@ -352,7 +354,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

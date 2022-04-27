@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameObject _laserPrefab;
     [SerializeField] GameObject _tripleShotPrefab;
+    [SerializeField] GameObject _heatSeekingMissilePrefab;
     [SerializeField] GameObject _shieldVisualizer;
     [SerializeField] GameObject _explosionPrefab;
     [SerializeField] GameObject _rightFire;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] int _ammo = 15;
     [SerializeField] float _playerSpeed = 7f;
     [SerializeField] bool _tripleShotActive = false;
+    [SerializeField] bool _heatSeekingMissileActive = false;
     [SerializeField] bool _speedPowerupActive = false;
     [SerializeField] bool _shieldActive = false;
     [SerializeField] int _shieldHitCount = 3;
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
             HandleMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo > 0)
-            ShootLaser();
+            Shoot();
        
         else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo <= 0)
             _audioSource.PlayOneShot(_noAmmo);
@@ -101,28 +103,23 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-10.23f, transform.position.y, 0);
     }
 
-    void ShootLaser()
+    void Shoot()
     {
-        if (_tripleShotActive == false)
+        if (_heatSeekingMissileActive == false)
         {
-            Vector3 laserOffset = new Vector3(0, 0.8f, 0);
-
-            Instantiate(_laserPrefab, transform.position + laserOffset, Quaternion.identity);
-            _canFire = Time.time + _fireRate;
-            _ammo--;
-            _uiManager.UpdateAmmo(_ammo);
+            if (_tripleShotActive == false)
+            {
+                ShootLaser();
+            }
+            else if (_tripleShotActive == true)
+            {
+                ShootTripleShot();
+            }
         }
-        else if (_tripleShotActive == true)
+        else if (_heatSeekingMissileActive == true)
         {
-            Vector3 laserOffset = new Vector3(0, 0.8f, 0);
-
-            Instantiate(_tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
-            _canFire = Time.time + _fireRate;
-            _ammo--;
-            _uiManager.UpdateAmmo(_ammo);
+            ShootHeatSeekingMissiles();
         }
-
-        _audioSource.PlayOneShot(_laserClip);
     }
 
     public void Damage()
@@ -183,14 +180,23 @@ public class Player : MonoBehaviour
     public void RefillAmmo()
     {
         _ammo = 15;
+        _audioSource.PlayOneShot(_powerupClip);
         _uiManager.UpdateAmmo(_ammo);
     }
 
     public void AddLife()
     {
         _playerLives++;
+        _audioSource.PlayOneShot(_powerupClip);
         _uiManager.UpdateLiveSprites(_playerLives);
         HandlePlayerHurtAnimations();
+    }
+
+    public void HeatSeekingMissileActive()
+    {
+        _heatSeekingMissileActive = true;
+        _audioSource.PlayOneShot(_powerupClip);
+        StartCoroutine(HeatSeekingMissilesPowerDownRoutine());
     }
 
     IEnumerator TripleShotPowerDownRoutine()
@@ -204,6 +210,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5);
         _playerSpeed = 7;
         _speedPowerupActive = false;
+    }
+
+    IEnumerator HeatSeekingMissilesPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _heatSeekingMissileActive = false;
     }
 
     public void AddScore(int points)
@@ -244,5 +256,37 @@ public class Player : MonoBehaviour
                 _shieldActive = false;
                 break;
         }
+    }
+
+    void ShootLaser()
+    {
+        Vector3 laserOffset = new Vector3(0, 0.8f, 0);
+
+        Instantiate(_laserPrefab, transform.position + laserOffset, Quaternion.identity);
+        _canFire = Time.time + _fireRate;
+        _ammo--;
+        _uiManager.UpdateAmmo(_ammo);
+        _audioSource.PlayOneShot(_laserClip);
+    }
+
+    void ShootTripleShot()
+    {
+        Vector3 laserOffset = new Vector3(0, 0.8f, 0);
+
+        Instantiate(_tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
+        _canFire = Time.time + _fireRate;
+        _ammo--;
+        _uiManager.UpdateAmmo(_ammo);
+        _audioSource.PlayOneShot(_laserClip);
+    }
+
+    void ShootHeatSeekingMissiles()
+    {
+        Vector3 laserOffset = new Vector3(0, 0.8f, 0);
+       
+        Instantiate(_heatSeekingMissilePrefab, transform.position + laserOffset, Quaternion.identity);
+        _canFire = Time.time + _fireRate;
+        _ammo--;
+        _uiManager.UpdateAmmo(_ammo);
     }
 }

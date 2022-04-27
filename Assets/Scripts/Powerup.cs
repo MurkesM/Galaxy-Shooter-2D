@@ -5,7 +5,9 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     [SerializeField] private float _speed = 3;
-    [SerializeField] private int powerupID;//0 = TripleShot, 1 = Speed, 2 = Shield, 3 = Ammo, 4 = Life
+    [SerializeField] private int powerupID;
+    //0 = TripleShot, 1 = Speed, 2 = Shield, 3 = Ammo, 4 = Life, 5 = HeakSeekingMissiles
+    
     private Player _player;
 
     void Start()
@@ -45,6 +47,9 @@ public class Powerup : MonoBehaviour
                         break;
                     case 4:
                         _player.AddLife();
+                        break;
+                    case 5:
+                        _player.HeatSeekingMissileActive();
                         break;
                     default:
                         Debug.Log("Default Value");

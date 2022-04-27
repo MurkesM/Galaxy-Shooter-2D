@@ -68,6 +68,16 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
         }
+
+        if (other.tag == "HSMissile")
+        {
+            _player.AddScore(10);
+
+            KillEnemy();
+
+            Destroy(other.gameObject);
+            Destroy(gameObject, 1.75f);
+        }
     }
 
     void KillEnemy()

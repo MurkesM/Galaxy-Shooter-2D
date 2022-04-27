@@ -39,7 +39,8 @@ public class UIManager : MonoBehaviour
     
     public void UpdateLiveSprites(int currentLives)
     {
-        _liveImage.sprite = _liveSprites[currentLives];
+        if (currentLives <= _liveSprites.Length)
+            _liveImage.sprite = _liveSprites[currentLives];
        
         if (currentLives < 1)
         {
