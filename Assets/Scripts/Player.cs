@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool _shieldActive = false;
     [SerializeField] int _shieldHitCount = 3;
     [SerializeField] bool _canMove = true;
+    Color _playerDefaultColor = new Color(255, 255, 255 ,255);
 
     float _fireRate = 0.15f;
     float _canFire = -1f;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     UIManager _uiManager;
     CameraShake _cameraShake;
     Collider2D _collider2D;
+    SpriteRenderer _playerSpriteRenderer;
     SpriteRenderer _shieldSpriteRenderer;
 
     AudioSource _audioSource;
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _collider2D = GetComponent<Collider2D>();
+        _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _shieldSpriteRenderer = _shieldVisualizer.GetComponent<SpriteRenderer>();
         _cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
@@ -57,6 +60,8 @@ public class Player : MonoBehaviour
             Debug.Log("UIManager is null");
         if (_audioSource == null)
             Debug.Log("Audio Source is null");
+        if (_playerSpriteRenderer == null)
+            Debug.Log("Player SpriteRenderer is null");
         if (_shieldSpriteRenderer == null)
             Debug.Log("Shield SpriteRenderer is null");
         if (_cameraShake == null)
@@ -212,6 +217,14 @@ public class Player : MonoBehaviour
         StartCoroutine(HeatSeekingMissilesPowerDownRoutine());
     }
 
+    public void FreezePlayer()
+    {
+        _canMove = false;
+        _playerSpriteRenderer.color = Color.cyan;
+        _cameraShake.CamShake();
+        StartCoroutine(FreezePlayerRoutine());
+    }
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
@@ -229,6 +242,13 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _heatSeekingMissileActive = false;
+    }
+
+    IEnumerator FreezePlayerRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _canMove = true;
+        _playerSpriteRenderer.color = _playerDefaultColor;
     }
 
     public void AddScore(int points)

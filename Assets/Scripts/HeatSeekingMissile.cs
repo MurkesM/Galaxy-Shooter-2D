@@ -6,6 +6,7 @@ public class HeatSeekingMissile : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _rotateSpeed = 100;
+    bool _closestEnemyNull = true;
 
     Rigidbody2D _rigidbody2D;
 
@@ -30,6 +31,15 @@ public class HeatSeekingMissile : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (_closestEnemyNull == true)
+        {
+            _rigidbody2D.velocity = transform.up * _moveSpeed;
+            transform.rotation = Quaternion.identity;
+        }
+    }
+
     void FindClosestEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
@@ -47,9 +57,11 @@ public class HeatSeekingMissile : MonoBehaviour
                 closestEnemy = currentEnemy;
             }
         }
-        //Moves missile to the closest enemy
+        //Moves missile to the closest enemy or forward if enemy is null
         if (closestEnemy != null)
         {
+            _closestEnemyNull = false;
+
              Vector2 targetDirection = (Vector2)closestEnemy.transform.position - _rigidbody2D.position;
 
              targetDirection.Normalize();
@@ -61,6 +73,10 @@ public class HeatSeekingMissile : MonoBehaviour
              _rigidbody2D.velocity = transform.up * _moveSpeed;
 
             //Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
+        }
+        else if (closestEnemy == null)
+        {
+            _closestEnemyNull = true;
         }
     }
 }
