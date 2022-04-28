@@ -60,7 +60,7 @@ public class HeatSeekingMissile : MonoBehaviour
 
              _rigidbody2D.velocity = transform.up * _moveSpeed;
 
-            Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
+            //Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
         }
     }
 }

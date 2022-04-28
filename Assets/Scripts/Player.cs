@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     SpawnManager _spawnManager;
     UIManager _uiManager;
+    CameraShake _cameraShake;
     Collider2D _collider2D;
     SpriteRenderer _shieldSpriteRenderer;
 
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _collider2D = GetComponent<Collider2D>();
         _shieldSpriteRenderer = _shieldVisualizer.GetComponent<SpriteRenderer>();
+        _cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
         if (_spawnManager == null)
             Debug.Log("SpawnManager is null");
@@ -55,6 +57,8 @@ public class Player : MonoBehaviour
             Debug.Log("Audio Source is null");
         if (_shieldSpriteRenderer == null)
             Debug.Log("Shield SpriteRenderer is null");
+        if (_cameraShake == null)
+            Debug.Log("CameraShake is null");
 
         _rightFire.SetActive(false);
         _leftFire.SetActive(false);
@@ -128,10 +132,13 @@ public class Player : MonoBehaviour
         {
             _shieldHitCount--;
             DamageShield();
+            _cameraShake.CamShake();
         }
         else if(_shieldActive == false && _playerLives > 0)
         {
             _playerLives--;
+
+            _cameraShake.CamShake();
 
             HandlePlayerHurtAnimations();
 
