@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _thruster;
 
     [SerializeField] int _playerLives = 3;
-    [SerializeField] int _ammo = 15;
+    [SerializeField] int _maxAmmo = 15;
+    [SerializeField] int _currentAmmo;
     [SerializeField] float _playerSpeed = 7f;
     [SerializeField] bool _tripleShotActive = false;
     [SerializeField] bool _heatSeekingMissileActive = false;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        _currentAmmo = _maxAmmo;
         transform.position = new Vector3(0, -3, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -71,10 +73,10 @@ public class Player : MonoBehaviour
         if (_canMove == true)
             HandleMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo > 0)
             Shoot();
        
-        else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _ammo <= 0)
+        else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo <= 0)
             _audioSource.PlayOneShot(_noAmmo);
     }
 
@@ -186,9 +188,9 @@ public class Player : MonoBehaviour
 
     public void RefillAmmo()
     {
-        _ammo = 15;
+        _currentAmmo = _maxAmmo;
         _audioSource.PlayOneShot(_powerupClip);
-        _uiManager.UpdateAmmo(_ammo);
+        _uiManager.UpdateAmmo(_currentAmmo, _maxAmmo);
     }
 
     public void AddLife()
@@ -275,8 +277,8 @@ public class Player : MonoBehaviour
 
         Instantiate(_laserPrefab, transform.position + laserOffset, Quaternion.identity);
         _canFire = Time.time + _fireRate;
-        _ammo--;
-        _uiManager.UpdateAmmo(_ammo);
+        _currentAmmo--;
+        _uiManager.UpdateAmmo(_currentAmmo, _maxAmmo);
         _audioSource.PlayOneShot(_laserClip);
     }
 
@@ -286,8 +288,8 @@ public class Player : MonoBehaviour
 
         Instantiate(_tripleShotPrefab, transform.position + laserOffset, Quaternion.identity);
         _canFire = Time.time + _fireRate;
-        _ammo--;
-        _uiManager.UpdateAmmo(_ammo);
+        _currentAmmo--;
+        _uiManager.UpdateAmmo(_currentAmmo, _maxAmmo);
         _audioSource.PlayOneShot(_laserClip);
     }
 
@@ -297,7 +299,7 @@ public class Player : MonoBehaviour
        
         Instantiate(_heatSeekingMissilePrefab, transform.position + laserOffset, Quaternion.identity);
         _canFire = Time.time + _fireRate;
-        _ammo--;
-        _uiManager.UpdateAmmo(_ammo);
+        _currentAmmo--;
+        _uiManager.UpdateAmmo(_currentAmmo, _maxAmmo);
     }
 }
