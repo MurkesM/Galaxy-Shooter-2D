@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text _ammoText;
     [SerializeField] Text _gameOverText;
     [SerializeField] Text _restartText;
+    [SerializeField] Text _pressLShiftText;
     private GameManager _gameManager;
+
+    bool _pressLShiftActive = false;
     
     void Start()
     {
@@ -22,6 +25,7 @@ public class UIManager : MonoBehaviour
         _ammoText.text = "Ammo: 15/15"; 
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
+        _pressLShiftText.gameObject.SetActive(false);
 
         if (_gameManager == null)
             Debug.Log("GameManager is null");
@@ -47,6 +51,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void PressLeftShiftUI()
+    {
+        _pressLShiftActive = true;
+        StartCoroutine(PressLeftShiftFlickerRoutine());
+    }
+
     void GameOverSequence()
     {
         _gameManager.GameOver();
@@ -62,6 +72,25 @@ IEnumerator GameOverFlickerRoutine()
             yield return new WaitForSeconds(.75f);
             _gameOverText.gameObject.SetActive(false);
             yield return new WaitForSeconds(.75f);
+        }
+    }
+
+    IEnumerator PressLeftShiftFlickerRoutine()
+    {
+        while (_pressLShiftActive == true)
+        {
+            _pressLShiftText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _pressLShiftText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1);
+            _pressLShiftText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _pressLShiftText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1);
+            _pressLShiftText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1);
+            _pressLShiftText.gameObject.SetActive(false);
+            _pressLShiftActive = false;
         }
     }
 }

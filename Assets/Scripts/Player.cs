@@ -178,6 +178,7 @@ public class Player : MonoBehaviour
     public void SpeedActive()
     {
         _audioSource.PlayOneShot(_powerupClip);
+        _uiManager.PressLeftShiftUI();
         StartCoroutine(SpeedPowerDownRoutine());
         _speedPowerupActive = true;
     }
