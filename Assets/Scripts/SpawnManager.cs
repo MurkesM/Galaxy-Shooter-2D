@@ -6,7 +6,9 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject _enemyPrefab;
     [SerializeField] GameObject _enemyContainer;
-    [SerializeField] GameObject[] _powerups;
+    [SerializeField] GameObject[] _commonPowerups;
+    [SerializeField] GameObject[] _rarePowerups;
+    [SerializeField] GameObject[] _extraRarePowerups;
     [SerializeField] GameObject _rarePowerup; //the rare power up is the heat seeking missiles
 
     [SerializeField] Enemy[] _wave1;
@@ -66,19 +68,35 @@ public class SpawnManager : MonoBehaviour
             float randomXPosition = Random.Range(-10, 10);
             Vector3 spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
             float randomSpawnTime = Random.Range(3f, 7f);
-            int randomPowerup = Random.Range(0, _powerups.Length);
-            int rarePowerupChance = Random.Range(0, 101);
+            int powerupChance = Random.Range(0, 11);
+            int randomCommonPowerup = Random.Range(0, _commonPowerups.Length);
+            int randomRarePowerup = Random.Range(0, _rarePowerups.Length);
+            int randomExtraRarePowerup = Random.Range(0, _extraRarePowerups.Length);
 
-            if (rarePowerupChance <= 10)
+            switch (powerupChance)
             {
-                Instantiate(_rarePowerup, spawnPosition, Quaternion.identity);
-                yield return new WaitForSeconds(randomSpawnTime);
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6: //Spawns with a 60% chance
+                    Instantiate(_commonPowerups[randomCommonPowerup], spawnPosition, Quaternion.identity);
+                    break;
+                case 7:
+                case 8:
+                case 9: //Spawns with a 30% chance
+                    Instantiate(_rarePowerups[randomRarePowerup], spawnPosition, Quaternion.identity);
+                    break;
+                case 10: //Spawns with a 10% chance
+                    Instantiate(_extraRarePowerups[randomExtraRarePowerup], spawnPosition, Quaternion.identity);
+                    break;
+                default:
+                    Debug.Log("Default powerup value");
+                    break;
             }
-            else if (rarePowerupChance >= 10)
-            {
-                Instantiate(_powerups[randomPowerup], spawnPosition, Quaternion.identity);
-                yield return new WaitForSeconds(randomSpawnTime);
-            }
+
+            yield return new WaitForSeconds(randomSpawnTime);
         }
     }
 
