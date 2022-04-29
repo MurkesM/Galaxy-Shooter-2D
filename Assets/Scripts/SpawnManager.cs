@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private GameObject _enemyContainer;
-    [SerializeField] private GameObject[] _powerups;
-    [SerializeField] private GameObject _rarePowerup; //the rare power up is the heat seeking missiles
+    [SerializeField] GameObject _enemyPrefab;
+    [SerializeField] GameObject _enemyContainer;
+    [SerializeField] GameObject[] _powerups;
+    [SerializeField] GameObject _rarePowerup; //the rare power up is the heat seeking missiles
 
-    private bool _stopSpawning = false;
+    [SerializeField] Enemy[] _wave1;
+    [SerializeField] Enemy[] _wave2;
+    [SerializeField] Enemy[] _wave3;
+
+    bool _stopSpawning = false;
+    int _currentWave = 1;
+    Vector3 spawnPosition;
 
     public void StartSpawning()
     {
@@ -19,16 +25,35 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        yield return new WaitForSeconds(3);
-
         while (_stopSpawning == false)
         {
-            float randomXPosition = Random.Range(-10, 10);
-            Vector3 spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
-
-            GameObject newEnemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5);
+            switch (_currentWave)
+            {
+                case 1:
+                    _currentWave++;
+                    foreach (Enemy enemy in _wave1)
+                    {
+                        SpawnEnemy();
+                    }
+                    break;
+                case 2:
+                    _currentWave++;
+                    foreach (Enemy enemy in _wave2)
+                    {
+                        SpawnEnemy();
+                    }
+                    break;
+                case 3:
+                    foreach (Enemy enemy in _wave3)
+                    {
+                        SpawnEnemy();
+                    }
+                    break;
+                default:
+                    Debug.Log("All out of Waves!"); //Might add more waves and a boss wave
+                    break;
+            }
+            yield return new WaitForSeconds(10);
         }
     }
 
@@ -55,6 +80,14 @@ public class SpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(randomSpawnTime);
             }
         }
+    }
+
+    void SpawnEnemy()
+    {
+        float randomXPosition = Random.Range(-10, 10);
+        spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
+        GameObject newEnemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+        newEnemy.transform.parent = _enemyContainer.transform;
     }
 
     public void OnPlayerDeath()
