@@ -14,9 +14,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] Enemy[] _wave1;
     [SerializeField] Enemy[] _wave2;
     [SerializeField] Enemy[] _wave3;
-
-    bool _stopSpawning = false;
     int _currentWave = 1;
+    
+    bool _stopSpawning = false;
     Vector3 spawnPosition;
 
     public void StartSpawning()

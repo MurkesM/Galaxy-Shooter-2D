@@ -11,11 +11,6 @@ public class CameraShake : MonoBehaviour
         _cameraAnim = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void CamShake()
     {
         _cameraAnim.SetTrigger("Shake");

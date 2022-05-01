@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool _shieldActive = false;
     [SerializeField] int _shieldHitCount = 3;
     [SerializeField] bool _canMove = true;
+    [SerializeField] float _powerupSpeed = 6;
     Color _playerDefaultColor = new Color(255, 255, 255 ,255);
 
     float _fireRate = 0.15f;
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
 
     SpawnManager _spawnManager;
     UIManager _uiManager;
+    Powerup[] _powerupArray;
     CameraShake _cameraShake;
     Collider2D _collider2D;
     SpriteRenderer _playerSpriteRenderer;
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
     {
         _currentAmmo = _maxAmmo;
         transform.position = new Vector3(0, -3, 0);
+       
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
@@ -75,14 +78,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (_canMove == true)
-            HandleMovement();
+        _powerupArray = FindObjectsOfType<Powerup>();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo > 0)
-            Shoot();
-       
-        else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo <= 0)
-            _audioSource.PlayOneShot(_noAmmo);
+        if (_canMove == true)
+        {
+            HandleMovement();
+            HandlePowerupCollection();
+
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo > 0)
+                Shoot();
+
+            else if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _currentAmmo <= 0)
+                _audioSource.PlayOneShot(_noAmmo);
+        }
     }
 
     void HandleMovement()
@@ -130,6 +138,18 @@ public class Player : MonoBehaviour
         else if (_heatSeekingMissileActive == true)
         {
             ShootHeatSeekingMissiles();
+        }
+    }
+
+    void HandlePowerupCollection()
+    {
+        if (Input.GetKey(KeyCode.C) && _powerupArray != null)
+        {
+            foreach (Powerup powerup in _powerupArray)
+            {
+                powerup.transform.position = Vector3.MoveTowards(powerup.transform.position,
+                    transform.position, _powerupSpeed * Time.deltaTime);
+            }
         }
     }
 

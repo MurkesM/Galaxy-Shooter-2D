@@ -1058,13 +1058,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 4032082343393936881, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
   _enemyContainer: {fileID: 2036127686}
-  _powerups:
+  _commonPowerups:
   - {fileID: 2403256341171712163, guid: a7d1abc313955ae4eaac45a6195cc645, type: 3}
   - {fileID: 2708490384313114299, guid: 138a03e4fc6c1e84b86ad228b6244926, type: 3}
-  - {fileID: 2586649739903643697, guid: 643bbbadf6091e744a35d3e1bb95b92c, type: 3}
   - {fileID: 6795258007054625668, guid: a56de80addaba5d41be9d015dd50b13f, type: 3}
-  - {fileID: 5477110617951962605, guid: 155fd1a08de8a654e883404b4afd0e87, type: 3}
+  _rarePowerups:
+  - {fileID: 2586649739903643697, guid: 643bbbadf6091e744a35d3e1bb95b92c, type: 3}
   - {fileID: 3485683940325243053, guid: 3fe02c41244b02e4aaad630a44851e29, type: 3}
+  _extraRarePowerups:
+  - {fileID: 5477110617951962605, guid: 155fd1a08de8a654e883404b4afd0e87, type: 3}
+  - {fileID: 4783143017179573975, guid: 3a2e3b305ebb77e40a55c8b69ac46475, type: 3}
   _rarePowerup: {fileID: 4783143017179573975, guid: 3a2e3b305ebb77e40a55c8b69ac46475, type: 3}
   _wave1:
   - {fileID: 4032082343393936883, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
