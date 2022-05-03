@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4032082343393936879}
   - component: {fileID: 4032082343393936877}
-  - component: {fileID: 4032082343393936883}
   - component: {fileID: 4032082343393936876}
   - component: {fileID: 4032082343393936882}
   - component: {fileID: 3292173271290608227}
   - component: {fileID: 5624958395537985516}
+  - component: {fileID: 8579512292969001338}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4032082343393936883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032082343393936881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4eaabe9995e7841ba3fd0e630b13ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemySpeed: 4
-  _enemyShotPrefab: {fileID: 2529876359841965864, guid: c9721297cd3ddec4aa68b09ffb159375, type: 3}
-  _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
 --- !u!50 &4032082343393936876
 Rigidbody2D:
   serializedVersion: 4
@@ -255,3 +239,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8579512292969001338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032082343393936881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9eb10a858017f4aa677f82d85c3bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySpeed: 4
+  _enemyShotPrefab: {fileID: 2529876359841965864, guid: c9721297cd3ddec4aa68b09ffb159375, type: 3}
+  _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _laserOffset: {x: 0, y: -1, z: 0}

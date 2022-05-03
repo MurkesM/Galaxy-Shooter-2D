@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _enemySpeed = 4;
+    [SerializeField] float _enemySpeed = 4;
     [SerializeField] GameObject _enemyShotPrefab;
+    [SerializeField] AudioClip _explosionClip;
+    [SerializeField] AudioClip _laserClip;
+    [SerializeField] Vector3 _laserOffset;
+    AudioSource _audioSource;
+
     Player _player;
     Animator _animator;
     Collider2D _collider2D;
     bool _enemyDead = false;
-
-  
-
-    private AudioSource _audioSource;
-    [SerializeField] AudioClip _explosionClip;
-    [SerializeField] AudioClip _laserClip;
-    private void Start()
+    
+    void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _animator = GetComponent<Animator>();
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
             _player.AddScore(10);
 
             KillEnemy();
+            Debug.Log("Test");
 
             Destroy(gameObject, 2.8f);
         }
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour
             _player.AddScore(10);
 
             KillEnemy();
-           
+
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
         }
@@ -91,12 +92,11 @@ public class Enemy : MonoBehaviour
 
     IEnumerator EnemyFireRoutine()
     {
-        Vector3 laserOffset = new Vector3(0, -0.8f, 0);
-
         while (_enemyDead == false)
         {
             int randomFireTime = Random.Range(3, 7);
-            Instantiate(_enemyShotPrefab, transform.position + laserOffset, Quaternion.identity);
+            GameObject newEnemyShot = Instantiate(_enemyShotPrefab, transform.position + _laserOffset, Quaternion.identity);
+            newEnemyShot.transform.parent = this.transform;
             _audioSource.PlayOneShot(_laserClip);
             yield return new WaitForSeconds(randomFireTime);
         }
