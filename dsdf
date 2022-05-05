@@ -1,0 +1,203 @@
+[33mcommit a19f6d25b5ecfc0b4e259b4e69bfb7e24cf72f4c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed May 4 21:14:06 2022 -0500
+
+    Added a new movement type that I can trigger on or off through a boolean
+
+[33mcommit 1ede7b33c5940a060bdc567a7c8ac919e9af91ae[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed May 4 19:45:41 2022 -0500
+
+    test4
+
+[33mcommit 717c014806fc8eee356379a477ded154e3339793[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed May 4 19:34:02 2022 -0500
+
+    test3
+
+[33mcommit d1143fc3f92c7286e6deab110b13492cb6e80827[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed May 4 19:32:32 2022 -0500
+
+    test2
+
+[33mcommit b05a3c15f6e0c6ca8c1dee99c8488fa2cd128851[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Mon May 2 21:37:31 2022 -0500
+
+    Added a new enemy type that shoots a laser beam
+
+[33mcommit 6643ac052c5ff73f484b83b274ad5b8481726c24[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sun May 1 12:07:02 2022 -0500
+
+    When the player holds down c, Powerups now move towards them
+
+[33mcommit 0ba2e06dd2502ba63c4f838fb825a8c0c404aa61[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Thu Apr 28 22:18:17 2022 -0500
+
+    Created spawning system for powerups with uncommon, rare and extra rare types of powerups
+
+[33mcommit 3de9a75cd185299747a3dad0be305b9d7cba117c[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Thu Apr 28 21:23:09 2022 -0500
+
+    Added a wave system that can be easily added to for future waves
+
+[33mcommit b2166a392b85bf17fe274c198637a2e88bfe9322[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 27 21:26:17 2022 -0500
+
+    Added some UI to signify speed boost is active
+
+[33mcommit 75f82859d12a91af573c7deb0bd46a71c5228ea8[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 27 21:04:35 2022 -0500
+
+    Added a negative pickup and fixed an issue with HeatSeekingMissiles
+
+[33mcommit 3af25b8772a935e8eb20a128afdb6ce52fbc7206[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 27 19:51:02 2022 -0500
+
+    Added UI for current/max ammo
+
+[33mcommit 2d8fe8ccf4f97a2680426521defadda3954e957b[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 27 19:33:43 2022 -0500
+
+    Added a camera shake feature when player takes damage
+
+[33mcommit 1059222414cd4a5513b8624eb249cf9ddd19dde2[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Tue Apr 26 21:47:47 2022 -0500
+
+    Fixed an Index outside of Range exception
+
+[33mcommit 6fa811433ffcd49fd98280dc524fd4529507c138[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Tue Apr 26 21:32:27 2022 -0500
+
+    Added a HeatSeakingMissile powerup that spawns rarely
+
+[33mcommit 6684503d2383d3f9f5b51c17125244a400434456[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 17:11:41 2022 -0500
+
+    resolved an issue allowing the player to sit outside of the enemies spawn range on the x axis.
+
+[33mcommit a90f9c6236e5bafad091c1fd11115e2b5cd1f553[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 16:57:10 2022 -0500
+
+    Added a health pickup
+
+[33mcommit af13c74768a4fc594176147133e8a3bfcbbc59df[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 16:24:27 2022 -0500
+
+    added a ammo refill powerup
+
+[33mcommit 1277f82bf2574f9e4c4beb3aa00fe266f1110f55[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 15:48:13 2022 -0500
+
+    Added an ammo system which shows current ammo through UI and plays a sfx if out of ammo
+
+[33mcommit f88ec6ee9d4aa6e3c9fecb82d7a495c76dbdc96e[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 15:04:14 2022 -0500
+
+    Shield can now take 3 hits and changes color based off how many hits its taken
+
+[33mcommit 562a37c9464e7a74c035d1d9b6afcc004af9efc0[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 12:18:31 2022 -0500
+
+    Cleaned up the Enemy script
+
+[33mcommit bf11d0b691540d87c4593c6cb3f24b9c9c0acfac[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 12:04:14 2022 -0500
+
+    Left shift now makes the player move faster when held down if they have the speed powerup
+
+[33mcommit 5fa98c988680745b9e3290177d647a0c92cba91f[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 23 11:26:15 2022 -0500
+
+    clean up
+
+[33mcommit bdfc9d9a91c9d47ff3fd916895d56b29f188f08a[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 20 19:23:24 2022 -0500
+
+    Added enemy lasers, bugfixed a few things, added close app button
+
+[33mcommit fc68805500fd0cfcf3b3ba1abcb10a40da9daec6[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 20 17:01:13 2022 -0500
+
+    added sfx
+
+[33mcommit d37655a2b89ca7d2de43ef4238622f322bb2e7ee[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 20 15:32:50 2022 -0500
+
+    added astroid, vfx and post processing
+
+[33mcommit 61569213848c531fd5c08bb48f68e3c6df975eb4[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 20 10:43:02 2022 -0500
+
+    Added restart game ui and logic. Also added a main menu with ui and logic.
+
+[33mcommit 77476e888619c545a71a2e9dcd15a4b2213547a8[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Tue Apr 19 22:11:12 2022 -0500
+
+    test
+
+[33mcommit 95cf95131e36555007159b1e02422d6ea5f8f23d[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Tue Apr 19 22:08:45 2022 -0500
+
+    Added score and gameover UI
+
+[33mcommit d849f5631ebb11b5ba7b8de29796f9cf9de2a91a[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Mon Apr 18 21:58:07 2022 -0500
+
+    Added speed and shield powerups
+
+[33mcommit 1d8ed74f55050991389719b28df1b8f906a07c93[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sat Apr 16 14:22:54 2022 -0500
+
+    Replaced primative objects with assets and added a tripleshot powerup
+
+[33mcommit 1b77b2f018933cceb8822440b72d43c4f1bb9cd3[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Thu Apr 14 21:59:04 2022 -0500
+
+    Setup a spawnmanager and imported some art assets
+
+[33mcommit 91d71bb34ceb117ce72edf7becffc149a2685b26[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Wed Apr 13 21:31:12 2022 -0500
+
+    Added a basic enemy and laser
+
+[33mcommit e921018221ae92ac4b2c45652837e345e7573c77[m
+Author: MurkesM <ethanmartin377@yahoo.com>
+Date:   Sun Apr 10 09:04:33 2022 -0500
+
+    first commit
+
+[33mcommit efcd10f95072c073185399ecc6f03fe496f41d14[m
+Author: MurkesM <91104156+MurkesM@users.noreply.github.com>
+Date:   Thu Apr 7 20:41:19 2022 -0500
+
+    Initial commit
