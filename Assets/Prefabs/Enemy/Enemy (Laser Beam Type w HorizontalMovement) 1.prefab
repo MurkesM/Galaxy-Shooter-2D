@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5624958395537985516}
   - component: {fileID: 575832737}
   m_Layer: 0
-  m_Name: Enemy (Laser Beam Type w HorizontalMovement)
+  m_Name: Enemy (Laser Beam Type w HorizontalMovement) 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   _horizontalSpeed: 2
   _moveHorizontaly: 1
   _moveRight: 0
-  _enemyShotPrefab: {fileID: 3423762833272143530, guid: a366328e4f2a8864ea79415a11daafc3, type: 3}
+  _enemyShotPrefab: {fileID: 7586555949225599460, guid: a366328e4f2a8864ea79415a11daafc3, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  _laserClip: {fileID: 8300000, guid: e2d478017410696419e4c47907615fec, type: 3}
-  _laserOffset: {x: 0, y: -4.65, z: 0}
+  _laserClip: {fileID: 8300000, guid: 53d4cb8327aea374ebcc66f38526f030, type: 3}
+  _laserOffset: {x: 0, y: -2.8, z: 0}

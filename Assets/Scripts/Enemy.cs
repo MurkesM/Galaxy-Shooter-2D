@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     Animator _animator;
     Collider2D _collider2D;
     bool _enemyDead = false;
-    
+
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
     {
         if (_moveRight == true)
             transform.Translate(new Vector3(1, 0, 0) * _horizontalSpeed * Time.deltaTime);
-        
+
         else if (_moveRight == false) //move left
             transform.Translate(new Vector3(-1, 0, 0) * _horizontalSpeed * Time.deltaTime);
     }
@@ -136,3 +136,4 @@ public class Enemy : MonoBehaviour
         }
     }
 }
+
