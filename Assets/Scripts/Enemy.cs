@@ -5,11 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float _enemySpeed = 4;
+    [SerializeField] float _horizontalSpeed = 2;
+    [SerializeField] bool _moveHorizontaly = false;
+    [SerializeField] bool _moveRight = false;
     [SerializeField] GameObject _enemyShotPrefab;
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _laserClip;
     [SerializeField] Vector3 _laserOffset;
-    //[SerializeField] bool _moveSideToSide = false;
     AudioSource _audioSource;
 
     Player _player;
@@ -33,21 +35,16 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(EnemyFireRoutine());
 
-        //if (_moveSideToSide == true)
-           // StartCoroutine(MoveSideToSide());
+        if (_moveHorizontaly == true)
+            StartCoroutine(SwitchDirectionRoutine());
     }
 
     void Update()
     {
-        transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
+        if (_moveHorizontaly == true)
+            MoveHorizontaly();
 
-        //if(_moveSideToSide == true)
-        //{
-        //    if (transform.position.x == transform.position.x + 4)
-        //      transform.Translate(Vector3.left * 50 * Time.deltaTime);
-        //    else if (transform.position.x == transform.position.x - 4)
-        //    transform.Translate(Vector3.right * _enemySpeed * Time.deltaTime);
-        //}
+        transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
 
         if (transform.position.y <= -6.5f)
         {
@@ -55,11 +52,11 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(randomXPosition, 8.5f, 0);
         }
 
-        //if (transform.position.x <= -10.23)
-        //    transform.position = new Vector3(10.23f, transform.position.y, 0);
+        if (transform.position.x <= -10.23)
+            transform.position = new Vector3(10.23f, transform.position.y, 0);
 
-        //else if (transform.position.x >= 10.23)
-        //    transform.position = new Vector3(-10.23f, transform.position.y, 0);
+        else if (transform.position.x >= 10.23)
+            transform.position = new Vector3(-10.23f, transform.position.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -119,15 +116,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //IEnumerator MoveSideToSide()
-    //{
-    //    while(_moveSideToSide == true)
-    //    {
-    //        Debug.Log("Test");
-    //        transform.Translate(Vector3.right * 50 * Time.deltaTime);
-    //        new WaitForSeconds(2);
-    //        transform.Translate(Vector3.left * _enemySpeed * Time.deltaTime);
-    //        yield return new WaitForSeconds(2);
-    //    }
-    //}
+    void MoveHorizontaly()
+    {
+        if (_moveRight == true)
+            transform.Translate(new Vector3(1, 0, 0) * _horizontalSpeed * Time.deltaTime);
+        
+        else if (_moveRight == false) //move left
+            transform.Translate(new Vector3(-1, 0, 0) * _horizontalSpeed * Time.deltaTime);
+    }
+
+    IEnumerator SwitchDirectionRoutine()
+    {
+        while (_moveHorizontaly == true)
+        {
+            _moveRight = true;
+            yield return new WaitForSeconds(3);
+            _moveRight = false; //move left
+            yield return new WaitForSeconds(3);
+        }
+    }
 }

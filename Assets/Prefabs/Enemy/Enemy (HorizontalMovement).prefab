@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5624958395537985516}
   - component: {fileID: 8579512292969001338}
   m_Layer: 0
-  m_Name: Enemy 1
+  m_Name: Enemy (HorizontalMovement)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,6 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpeed: 4
+  _horizontalSpeed: 2
+  _moveHorizontaly: 1
+  _moveRight: 0
   _enemyShotPrefab: {fileID: 2529876359841965864, guid: c9721297cd3ddec4aa68b09ffb159375, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}

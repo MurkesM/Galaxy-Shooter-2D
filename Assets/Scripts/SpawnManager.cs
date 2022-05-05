@@ -9,13 +9,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] _commonPowerups;
     [SerializeField] GameObject[] _rarePowerups;
     [SerializeField] GameObject[] _extraRarePowerups;
-    [SerializeField] GameObject _rarePowerup; //the rare power up is the heat seeking missiles
-
-    [SerializeField] Enemy[] _wave1;
-    [SerializeField] Enemy[] _wave2;
-    [SerializeField] Enemy[] _wave3;
+    [SerializeField] GameObject[] _wave1;
+    [SerializeField] GameObject[] _wave2;
+    [SerializeField] GameObject[] _wave3;
+    [SerializeField] GameObject[] _enemyPrefabs;
     int _currentWave = 1;
-    
+    int _randomEnemyPrefab;
     bool _stopSpawning = false;
     Vector3 spawnPosition;
 
@@ -33,20 +32,20 @@ public class SpawnManager : MonoBehaviour
             {
                 case 1:
                     _currentWave++;
-                    foreach (Enemy enemy in _wave1)
+                    foreach (GameObject enemy in _wave1)
                     {
                         SpawnEnemy();
                     }
                     break;
                 case 2:
                     _currentWave++;
-                    foreach (Enemy enemy in _wave2)
+                    foreach (GameObject enemy in _wave2)
                     {
                         SpawnEnemy();
                     }
                     break;
                 case 3:
-                    foreach (Enemy enemy in _wave3)
+                    foreach (GameObject enemy in _wave3)
                     {
                         SpawnEnemy();
                     }
@@ -102,9 +101,10 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
+        _randomEnemyPrefab = Random.Range(0, _enemyPrefabs.Length);
         float randomXPosition = Random.Range(-10, 10);
         spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
-        GameObject newEnemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(_enemyPrefabs[_randomEnemyPrefab], spawnPosition, Quaternion.identity);
         newEnemy.transform.parent = _enemyContainer.transform;
     }
 
