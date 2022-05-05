@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7627355934010751385}
   - component: {fileID: 7627355934010751384}
   - component: {fileID: 7627355934010751391}
-  - component: {fileID: 7627355934010751390}
   - component: {fileID: 7627355934010751389}
+  - component: {fileID: 7627355934010751390}
   - component: {fileID: 380524883836874703}
   m_Layer: 0
   m_Name: HeatSeekingMissile
@@ -102,20 +102,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.028377771, y: 2.1393447}
   m_Size: {x: 2.8242397, y: 8.172029}
   m_Direction: 0
---- !u!114 &7627355934010751390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7627355934010751388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ed88f45d4dd474db0abf262c276cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _rotateSpeed: 500
 --- !u!50 &7627355934010751389
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +123,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7627355934010751390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627355934010751388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ed88f45d4dd474db0abf262c276cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 5
+  _rotateSpeed: 500
 --- !u!82 &380524883836874703
 AudioSource:
   m_ObjectHideFlags: 0

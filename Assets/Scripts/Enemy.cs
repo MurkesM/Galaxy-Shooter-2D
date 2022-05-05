@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _laserClip;
     [SerializeField] Vector3 _laserOffset;
+    //[SerializeField] bool _moveSideToSide = false;
     AudioSource _audioSource;
 
     Player _player;
@@ -31,17 +32,34 @@ public class Enemy : MonoBehaviour
             Debug.Log("Audio Source is null");
 
         StartCoroutine(EnemyFireRoutine());
+
+        //if (_moveSideToSide == true)
+           // StartCoroutine(MoveSideToSide());
     }
 
     void Update()
     {
         transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
 
+        //if(_moveSideToSide == true)
+        //{
+        //    if (transform.position.x == transform.position.x + 4)
+        //      transform.Translate(Vector3.left * 50 * Time.deltaTime);
+        //    else if (transform.position.x == transform.position.x - 4)
+        //    transform.Translate(Vector3.right * _enemySpeed * Time.deltaTime);
+        //}
+
         if (transform.position.y <= -6.5f)
         {
             float randomXPosition = Random.Range(-9f, 9f);
             transform.position = new Vector3(randomXPosition, 8.5f, 0);
         }
+
+        //if (transform.position.x <= -10.23)
+        //    transform.position = new Vector3(10.23f, transform.position.y, 0);
+
+        //else if (transform.position.x >= 10.23)
+        //    transform.position = new Vector3(-10.23f, transform.position.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -55,7 +73,6 @@ public class Enemy : MonoBehaviour
             _player.AddScore(10);
 
             KillEnemy();
-            Debug.Log("Test");
 
             Destroy(gameObject, 2.8f);
         }
@@ -101,4 +118,16 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(randomFireTime);
         }
     }
+
+    //IEnumerator MoveSideToSide()
+    //{
+    //    while(_moveSideToSide == true)
+    //    {
+    //        Debug.Log("Test");
+    //        transform.Translate(Vector3.right * 50 * Time.deltaTime);
+    //        new WaitForSeconds(2);
+    //        transform.Translate(Vector3.left * _enemySpeed * Time.deltaTime);
+    //        yield return new WaitForSeconds(2);
+    //    }
+    //}
 }
