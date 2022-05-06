@@ -1034,13 +1034,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 575832737, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
-      propertyPath: _moveHorizontaly
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4032082343393936879, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4032082343393936879, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1086,24 +1082,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (Laser Beam Type)
       objectReference: {fileID: 0}
-    - target: {fileID: 5695439799276027488, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
-      propertyPath: _laserClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e2d478017410696419e4c47907615fec, type: 3}
-    - target: {fileID: 5695439799276027488, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
-      propertyPath: _explosionClip
-      value: 
-      objectReference: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-    - target: {fileID: 5695439799276027488, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
-      propertyPath: _laserOffset.y
-      value: -9.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5695439799276027488, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
-      propertyPath: _enemyShotPrefab
-      value: 
-      objectReference: {fileID: 3423762833272143530, guid: a366328e4f2a8864ea79415a11daafc3, type: 3}
-    m_RemovedComponents:
-    - {fileID: -6545480378073639173, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb200b563b2b6fb41be820dc82c3c2b4, type: 3}
 --- !u!1 &1193971515
 GameObject:
@@ -1553,7 +1532,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4032082343393936879, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4032082343393936879, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1598,14 +1577,6 @@ PrefabInstance:
     - target: {fileID: 4032082343393936881, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8579512292969001338, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
-      propertyPath: _moveRight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8579512292969001338, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
-      propertyPath: _moveHorizontaly
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01a022e276a2fab459b44b0bd7e92081, type: 3}
@@ -1713,7 +1684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2988315803903449615, guid: 4e60dec5bbfbd4341ae35668ff00782c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2988315803903449615, guid: 4e60dec5bbfbd4341ae35668ff00782c, type: 3}
       propertyPath: m_LocalPosition.x
