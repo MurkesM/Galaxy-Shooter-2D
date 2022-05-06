@@ -255,7 +255,9 @@ MonoBehaviour:
   _horizontalSpeed: 2
   _moveHorizontaly: 0
   _moveRight: 0
-  _enemyShotPrefab: {fileID: 7586555949225599460, guid: a366328e4f2a8864ea79415a11daafc3, type: 3}
+  _enemyShotPrefab: {fileID: 3423762833272143530, guid: a366328e4f2a8864ea79415a11daafc3, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  _laserClip: {fileID: 8300000, guid: 53d4cb8327aea374ebcc66f38526f030, type: 3}
-  _laserOffset: {x: 0, y: -2.8, z: 0}
+  _laserClip: {fileID: 8300000, guid: e2d478017410696419e4c47907615fec, type: 3}
+  _laserOffset: {x: 0, y: -4.65, z: 0}
+  _shieldActive: 0
+  _shieldVisualizer: {fileID: 6818707711780433935, guid: 0e00a19de6b22e74c9149090d5d8be08, type: 3}

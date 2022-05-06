@@ -29,6 +29,8 @@ public class EnemyLaser : MonoBehaviour
             {
                 _player.Damage();
             }
+
+            Destroy(gameObject);
         }
     }
 }

@@ -12,13 +12,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip _explosionClip;
     [SerializeField] AudioClip _laserClip;
     [SerializeField] Vector3 _laserOffset;
+    [SerializeField] bool _shieldActive = false;
+    [SerializeField] GameObject _shieldVisualizer;
     AudioSource _audioSource;
+    
 
     Player _player;
     Animator _animator;
     Collider2D _collider2D;
     bool _enemyDead = false;
-
+    
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
@@ -37,6 +40,11 @@ public class Enemy : MonoBehaviour
 
         if (_moveHorizontaly == true)
             StartCoroutine(SwitchDirectionRoutine());
+
+        if (_shieldActive == true)
+            _shieldVisualizer.SetActive(true);
+        else if (_shieldActive == false)
+            _shieldVisualizer.SetActive(false);
     }
 
     void Update()
@@ -63,35 +71,61 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (_player != null)
+            if (_shieldActive == true)
             {
-                _player.Damage();
+                _shieldActive = false;
+                _shieldVisualizer.SetActive(false);
             }
-            _player.AddScore(10);
+            else if (_shieldActive == false)
+            {
+                if (_player != null)
+                {
+                    _player.Damage();
+                    _player.AddScore(10);
+                }
 
-            KillEnemy();
+                KillEnemy();
 
-            Destroy(gameObject, 2.8f);
+                Destroy(gameObject, 2.8f);
+            }
         }
 
         if (other.tag == "Laser")
         {
-            _player.AddScore(10);
+            if (_shieldActive == true)
+            {
+                _shieldActive = false;
+                _shieldVisualizer.SetActive(false);
+            }
+            else if (_shieldActive == false)
+            {
+                if (_player != null)
+                    _player.AddScore(10);
 
-            KillEnemy();
+                KillEnemy();
 
-            Destroy(other.gameObject);
-            Destroy(gameObject, 2.8f);
+                Destroy(other.gameObject);
+                Destroy(gameObject, 2.8f);
+            }
         }
 
         if (other.tag == "HSMissile")
         {
-            _player.AddScore(10);
+            if (_shieldActive == true)
+            {
+                _shieldActive = false;
+                _shieldVisualizer.SetActive(false);
+            }
+            else if (_shieldActive == false)
+            {
+                if (_player != null)
+                    _player.AddScore(10);
 
-            KillEnemy();
+                KillEnemy();
 
-            Destroy(other.gameObject);
-            Destroy(gameObject, 1.75f);
+                Destroy(other.gameObject);
+                Destroy(gameObject, 1.75f);
+            }
         }
     }
 
@@ -100,6 +134,7 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("OnEnemyDeath");
         _enemyDead = true;
         _enemySpeed = 1.5f;
+        _horizontalSpeed = .5f;
         _collider2D.enabled = false;
         _audioSource.PlayOneShot(_explosionClip);
     }
@@ -120,7 +155,7 @@ public class Enemy : MonoBehaviour
     {
         if (_moveRight == true)
             transform.Translate(new Vector3(1, 0, 0) * _horizontalSpeed * Time.deltaTime);
-
+        
         else if (_moveRight == false) //move left
             transform.Translate(new Vector3(-1, 0, 0) * _horizontalSpeed * Time.deltaTime);
     }
@@ -136,4 +171,3 @@ public class Enemy : MonoBehaviour
         }
     }
 }
-
