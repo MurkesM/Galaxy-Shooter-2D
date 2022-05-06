@@ -259,3 +259,5 @@ MonoBehaviour:
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _laserClip: {fileID: 8300000, guid: e2d478017410696419e4c47907615fec, type: 3}
   _laserOffset: {x: 0, y: -4.65, z: 0}
+  _shieldActive: 0
+  _shieldVisualizer: {fileID: 6818707711780433935, guid: 0e00a19de6b22e74c9149090d5d8be08, type: 3}
