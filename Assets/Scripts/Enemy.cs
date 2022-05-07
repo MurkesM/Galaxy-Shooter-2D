@@ -81,8 +81,8 @@ public class Enemy : MonoBehaviour
                 if (_player != null)
                 {
                     _player.Damage();
+                    _player.AddScore(10);
                 }
-                _player.AddScore(10);
 
                 KillEnemy();
 
@@ -99,7 +99,8 @@ public class Enemy : MonoBehaviour
             }
             else if (_shieldActive == false)
             {
-                _player.AddScore(10);
+                if (_player != null)
+                    _player.AddScore(10);
 
                 KillEnemy();
 
@@ -117,7 +118,8 @@ public class Enemy : MonoBehaviour
             }
             else if (_shieldActive == false)
             {
-                _player.AddScore(10);
+                if (_player != null)
+                    _player.AddScore(10);
 
                 KillEnemy();
 

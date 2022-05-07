@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Enemy/Enemy (Laser Beam Type w HorizontalMovement).prefab.meta
+guid: 4a9b76411b6a4da43be3ed5c49852889
+========
+guid: 998de27dab5eecf4f8d7fe6a2ad2f2a2
+>>>>>>>> e62d894d8920ac5cadc3a1ebb646e32046417100:Assets/Prefabs/Enemy/BossMinions.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
