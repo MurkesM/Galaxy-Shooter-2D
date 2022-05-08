@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -405598319
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 621437c058e548e43bb362ddd3fa25e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -138,10 +138,16 @@ MonoBehaviour:
   _bossSpeed: 2
   _fireBallPrefab: {fileID: 5503430043222523037, guid: d7cc2bcab8a1f4048a18fe166071ce80, type: 3}
   _energyBallsPrefab: {fileID: 449941362193059910, guid: 29d39c6e08131044eb4567c1ba6bec83, type: 3}
-  _enemyMinionsPrefab: {fileID: 5282675136343374385, guid: 998de27dab5eecf4f8d7fe6a2ad2f2a2, type: 3}
+  _enemyMinionsPrefab: {fileID: 5282675136343374385, guid: 4a9b76411b6a4da43be3ed5c49852889, type: 3}
   _fireBallOffset: {x: -0.1, y: -2, z: 0}
-  _minionsOffset: {x: 1.5, y: -2, z: 0}
-  _bossHealth: 20
+  _minionsOffset: {x: 1.23, y: -2, z: 0}
+  _explosionOffset: {x: -0.25, y: 0, z: 0}
+  _maxHealth: 20
+  _currentHealth: 20
+  _explosionPrefab: {fileID: 5921232694906149614, guid: df077d19b8f40a446a45823ad93e5ae4, type: 3}
+  _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _fireBallSFX: {fileID: 8300000, guid: da21ac08d9e13a4458a8df872b375d57, type: 3}
+  _energyBallSFX: {fileID: 8300000, guid: d779413399a48d348a029885e6f683f0, type: 3}
 --- !u!82 &7234493019280061234
 AudioSource:
   m_ObjectHideFlags: 0
@@ -152,11 +158,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: dd1bcad31079acc4da0996217a7facb5, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

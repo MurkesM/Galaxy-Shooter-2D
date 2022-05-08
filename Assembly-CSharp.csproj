@@ -63,6 +63,8 @@
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\FireBall.cs" />
+    <Compile Include="Assets\Scripts\EnemyBoss.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -70,9 +72,7 @@
     <Compile Include="Assets\Scripts\Laser.cs" />
     <Compile Include="Assets\Scripts\HeatSeekingMissile.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
-    <Compile Include="Assets\Scripts\EnemyBoss.cs" />
-    <Compile Include="Assets\Scripts\Energy.cs" />
-    <Compile Include="Assets\Scripts\FireBall.cs" />
+    <Compile Include="Assets\Scripts\EnergyBall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GameDevHQ\FileBase\Plugin\Filebase.dll" />

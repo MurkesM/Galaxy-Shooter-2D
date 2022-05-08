@@ -10,126 +10,133 @@ public class EnemyBoss : MonoBehaviour
     [SerializeField] GameObject _enemyMinionsPrefab;
     [SerializeField] Vector3 _fireBallOffset;
     [SerializeField] Vector3 _minionsOffset;
-    [SerializeField] int _bossHealth = 20;
+    [SerializeField] Vector3 _explosionOffset;
+    [SerializeField] int _maxHealth = 20;
+    [SerializeField] int _currentHealth;
+    [SerializeField] GameObject _explosionPrefab;
 
-    Player _player;
+    [SerializeField] AudioClip _explosionSFX;
+    [SerializeField] AudioClip _fireBallSFX;
+    [SerializeField] AudioClip _energyBallSFX;
+
+    GameObject _currentMinion;
     bool _canMove = true;
     bool _bossDead = false;
     bool _changeColor = false;
     bool _defaultFire = true;
-    bool _fireEnergyShot = false;
+    bool _canTakeDmg = false;
     Color _defaultColor = new Color(255, 255, 255, 255);
+    Player _player;
     AudioSource _audioSource;
     SpriteRenderer _spriteRenderer;
+    SpawnManager _spawnManager;
+    UIManager _UIManager;
 
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-       
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _currentHealth = _maxHealth;
+
         if (_player == null)
             Debug.Log("Player is null");
         if (_audioSource == null)
             Debug.Log("AudioSource is null");
         if (_spriteRenderer == null)
             Debug.Log("SpriteRenderer is null");
-
-        StartCoroutine(StandardFireRoutine());
-        StartCoroutine(SpawnMinionsRoutine());
+        if (_spawnManager == null)
+            Debug.Log("SpawnManager is null");
+        if (_UIManager == null)
+            Debug.Log("UIManager is null");
     }
 
     void Update()
     {
         if (_canMove == true)
             transform.Translate(Vector2.down * _bossSpeed * Time.deltaTime);
-
-        if (transform.position.y <= 4.56)
-            _canMove = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Laser")
+        if (other.tag == "BossStopPoint")
         {
-            _bossHealth--;
-            Destroy(other.gameObject);
-
-            _changeColor = true;
-            if (_changeColor == true)
-              StartCoroutine(ChangeColor());
-
-            switch (_bossHealth)
-            {
-                case 0:
-                    if (_player != null)
-                        _player.AddScore(2000);
-                    Destroy(gameObject);
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                    StartCoroutine(EnergyShotFireRoutine());
-                    break;
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                default:
-                    Debug.Log("Default Value");
-                    break;
-            }
-
-            if (_bossHealth <= 0)
-            {
-                
-            }
+            _canMove = false;
+            _canTakeDmg = true;
+            _UIManager.BossHealthUI();
+            StartCoroutine(StandardFireRoutine());
+            SpawnMinions();
         }
 
-        if (other.tag == "HSMissile")
+        if (_canTakeDmg == true)
         {
-            _bossHealth--;
-            Destroy(other.gameObject);
-
-            _changeColor = true;
-            if (_changeColor == true)
-                StartCoroutine(ChangeColor());
-
-            if (_bossHealth <= 0)
+            if (other.tag == "Laser")
             {
-                if (_player != null)
-                    _player.AddScore(2000);
+                Destroy(other.gameObject);
+                TakeDamage();
+                HandleShootingPatterns();
+            }
 
-                Destroy(gameObject);
+            if (other.tag == "HSMissile")
+            {
+                Destroy(other.gameObject);
+                TakeDamage();
+                HandleShootingPatterns();
             }
         }
     }
 
+    void HandleShootingPatterns()
+    {
+        switch (_currentHealth)
+        {
+            case 0:
+                KillBoss();
+                break;
+            case 10:
+                Debug.Log("Boss Health is 10");
+                StartCoroutine(EnergyShotFireRoutine());
+                break;
+            default:
+                Debug.Log("Default Value");
+                break;
+        }
+    }
+
+    void TakeDamage()
+    {
+        _currentHealth--;
+        _UIManager.UpdateBossHealth();
+
+        _changeColor = true;
+        if (_changeColor == true)
+            StartCoroutine(ChangeColor());
+    }
+
+    void KillBoss()
+    {
+        if (_player != null)
+            _player.AddScore(2000);
+        _bossDead = true;
+        _spawnManager.OnBossDeath();
+        _UIManager.BossIsDeadUI();
+        Instantiate(_explosionPrefab, transform.position + _explosionOffset, Quaternion.identity);
+        _audioSource.PlayOneShot(_explosionSFX);
+        Destroy(_currentMinion);
+        Destroy(gameObject, 2.5f);
+    }
+
     IEnumerator StandardFireRoutine()
     {
-        while (_bossDead == false)
+        while (_defaultFire == true)
         {
-            while (_defaultFire == true)
-            {
-                int randomFireTime = Random.Range(0, 5);
-                GameObject newEnemyShot = Instantiate(_fireBallPrefab, transform.position + _fireBallOffset, Quaternion.identity);
-                newEnemyShot.transform.parent = this.transform;
-                //_audioSource.PlayOneShot(_laserClip);
-                yield return new WaitForSeconds(randomFireTime);
-            }
+            int randomFireTime = Random.Range(0, 5);
+            GameObject newEnemyShot = Instantiate(_fireBallPrefab, transform.position + _fireBallOffset, Quaternion.identity);
+            newEnemyShot.transform.parent = this.transform;
+            _audioSource.PlayOneShot(_fireBallSFX);
+            yield return new WaitForSeconds(randomFireTime);
         }
     }
 
@@ -137,24 +144,17 @@ public class EnemyBoss : MonoBehaviour
     {
         while (_bossDead == false)
         {
-            while (_fireEnergyShot == true)
-            {
-                GameObject newEnemyShot = Instantiate(_energyBallsPrefab, transform.position + _fireBallOffset, Quaternion.identity);
-                newEnemyShot.transform.parent = this.transform;
-                //_audioSource.PlayOneShot(_laserClip);
-                yield return new WaitForSeconds(0.5f);
-            }
+            _defaultFire = false;
+            GameObject newEnemyShot = Instantiate(_energyBallsPrefab, transform.position + _fireBallOffset, Quaternion.identity);
+            newEnemyShot.transform.parent = this.transform;
+            _audioSource.PlayOneShot(_energyBallSFX);
+            yield return new WaitForSeconds(0.8f);
         }
     }
 
-    IEnumerator SpawnMinionsRoutine()
+    void SpawnMinions()
     {
-        while (_bossDead == false)
-        {
-            yield return new WaitForSeconds(3);
-            Instantiate(_enemyMinionsPrefab, transform.position + _minionsOffset, Quaternion.identity);
-            yield return new WaitForSeconds(8);
-        }
+         _currentMinion = Instantiate(_enemyMinionsPrefab, transform.position + _minionsOffset, Quaternion.identity);
     }
 
     IEnumerator ChangeColor()

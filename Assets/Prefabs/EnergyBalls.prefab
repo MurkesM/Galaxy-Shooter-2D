@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 449941361319559632}
   - component: {fileID: 449941361319559634}
-  - component: {fileID: 449941361319559635}
   - component: {fileID: 449941361319559636}
   - component: {fileID: 449941361319559637}
+  - component: {fileID: 2322190456214497427}
   m_Layer: 0
   m_Name: Energy (2)
   m_TagString: EnemyLaser
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449941361319559633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0.8, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 449941362193059929}
@@ -85,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &449941361319559635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449941361319559633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3f3be29dbdd1e4e9000b7d21332518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 6
 --- !u!58 &449941361319559636
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,6 +122,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2322190456214497427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449941361319559633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1fed18f042cd419a0e025d8c376ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 6
 --- !u!1 &449941361491339743
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,9 +145,9 @@ GameObject:
   m_Component:
   - component: {fileID: 449941361491339742}
   - component: {fileID: 449941361491339728}
-  - component: {fileID: 449941361491339729}
   - component: {fileID: 449941361491339730}
   - component: {fileID: 449941361491339731}
+  - component: {fileID: 8013282792110551351}
   m_Layer: 0
   m_Name: Energy
   m_TagString: EnemyLaser
@@ -220,19 +220,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &449941361491339729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449941361491339743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3f3be29dbdd1e4e9000b7d21332518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 6
 --- !u!58 &449941361491339730
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -270,6 +257,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8013282792110551351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449941361491339743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1fed18f042cd419a0e025d8c376ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 6
 --- !u!1 &449941361524208763
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,9 +280,9 @@ GameObject:
   m_Component:
   - component: {fileID: 449941361524208762}
   - component: {fileID: 449941361524208764}
-  - component: {fileID: 449941361524208765}
   - component: {fileID: 449941361524208766}
   - component: {fileID: 449941361524208767}
+  - component: {fileID: 4526308888604515804}
   m_Layer: 0
   m_Name: Energy (1)
   m_TagString: EnemyLaser
@@ -298,7 +298,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449941361524208763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -1.1, z: 0}
+  m_LocalPosition: {x: -0.8, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 449941362193059929}
@@ -355,19 +355,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &449941361524208765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449941361524208763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3f3be29dbdd1e4e9000b7d21332518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 6
 --- !u!58 &449941361524208766
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -405,6 +392,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4526308888604515804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449941361524208763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1fed18f042cd419a0e025d8c376ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 6
 --- !u!1 &449941362193059910
 GameObject:
   m_ObjectHideFlags: 0

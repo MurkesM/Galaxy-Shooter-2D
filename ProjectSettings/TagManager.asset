@@ -9,6 +9,7 @@ TagManager:
   - EnemyLaser
   - HSMissile
   - Powerup
+  - BossStopPoint
   layers:
   - Default
   - TransparentFX

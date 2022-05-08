@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _thruster;
 
     [SerializeField] int _playerLives = 3;
-    [SerializeField] int _maxAmmo = 15;
+    [SerializeField] int _maxAmmo = 20;
     [SerializeField] int _currentAmmo;
     [SerializeField] float _playerSpeed = 7f;
     [SerializeField] bool _tripleShotActive = false;
@@ -180,10 +180,11 @@ public class Player : MonoBehaviour
 
     void KillPlayer()
     {
+        _spawnManager.StopSpawning();
+        _uiManager.PlayerIsDeadUI();
         _canMove = false;
         _collider2D.enabled = false;
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-        _spawnManager.OnPlayerDeath();
         _audioSource.PlayOneShot(_explosionClip);
         Destroy(gameObject, 1.75f);
     }

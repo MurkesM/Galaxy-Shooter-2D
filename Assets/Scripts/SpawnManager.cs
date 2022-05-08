@@ -12,14 +12,24 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] _wave1;
     [SerializeField] GameObject[] _wave2;
     [SerializeField] GameObject[] _wave3;
+    [SerializeField] GameObject[] _bossWave;
     [SerializeField] GameObject[] _enemyPrefabs;
+    [SerializeField] GameObject _bossPrefab;
+    
     int _currentWave = 1;
     int _randomEnemyPrefab;
     bool _stopSpawning = false;
+    bool _spawnBoss = true;
     Vector3 spawnPosition;
+
+    void Update()
+    {
+        
+    }
 
     public void StartSpawning()
     {
+        _stopSpawning = false;
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnPowerup());
     }
@@ -35,6 +45,7 @@ public class SpawnManager : MonoBehaviour
                     foreach (GameObject enemy in _wave1)
                     {
                         SpawnEnemy();
+                        yield return new WaitForSeconds(1);
                     }
                     break;
                 case 2:
@@ -42,16 +53,36 @@ public class SpawnManager : MonoBehaviour
                     foreach (GameObject enemy in _wave2)
                     {
                         SpawnEnemy();
+                        yield return new WaitForSeconds(1);
                     }
                     break;
                 case 3:
+                    _currentWave++;
                     foreach (GameObject enemy in _wave3)
                     {
                         SpawnEnemy();
+                        yield return new WaitForSeconds(1);
+                    }
+                    break;
+                case 4:
+                    SpawnBoss();
+                    _spawnBoss = false;
+                    yield return new WaitForSeconds(2);
+                    foreach (GameObject enemy in _bossWave)
+                    {
+                        SpawnEnemy();
+                    }
+                    //When the boss gets killed the wave will increment by 1 again
+                    break;
+                case 5:
+                    foreach (GameObject enemy in _wave3)
+                    {
+                        SpawnEnemy();
+                        yield return new WaitForSeconds(1);
                     }
                     break;
                 default:
-                    Debug.Log("All out of Waves!"); //Might add more waves and a boss wave
+                    Debug.Log("All out of Waves!"); 
                     break;
             }
             yield return new WaitForSeconds(10);
@@ -101,15 +132,32 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        _randomEnemyPrefab = Random.Range(0, _enemyPrefabs.Length);
-        float randomXPosition = Random.Range(-10, 10);
-        spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
-        GameObject newEnemy = Instantiate(_enemyPrefabs[_randomEnemyPrefab], spawnPosition, Quaternion.identity);
-        newEnemy.transform.parent = _enemyContainer.transform;
+        if (_stopSpawning == false)
+        {
+            _randomEnemyPrefab = Random.Range(0, _enemyPrefabs.Length);
+            float randomXPosition = Random.Range(-10, 10);
+            spawnPosition = new Vector3(randomXPosition, 8.5f, 0);
+            GameObject newEnemy = Instantiate(_enemyPrefabs[_randomEnemyPrefab], spawnPosition, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+        }
     }
 
-    public void OnPlayerDeath()
+    void SpawnBoss()
+    {
+        if (_spawnBoss == true && _stopSpawning == false)
+        {
+            spawnPosition = new Vector3(0, 11, 0);
+            Instantiate(_bossPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    public void StopSpawning()
     {
         _stopSpawning = true;
+    }
+
+    public void OnBossDeath()
+    {
+        _currentWave++;
     }
 }
